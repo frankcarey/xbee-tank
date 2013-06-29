@@ -1,3 +1,20 @@
+// XBEE RC Tank by frankcarey (http://frankcarey.com)
+
+// Simple RC code based on receiving characters over serial. 
+
+// Controls:
+
+// 'w' - Forward
+// 's' - Backward
+// 'a' - Rotate Left
+// 'd' - Rotate right
+
+
+// NOTE: This is using the arduino brand motor controller. Other motor controllers
+// may use different pins, including the pins used for xbee serial, so change as
+// needed.
+
+
 #define FORWARD 0
 #define LEFT 0
 #define BACK 1
@@ -5,9 +22,11 @@
 
 #include <SoftwareSerial.h>
 
-SoftwareSerial xbee(6, 7); // RX, TX
+SoftwareSerial xbee(6, 7); // Software RX, TX for xbee so that we can debug 
+                           // using regular serial.
 
 void _move(int dir) {
+  
   digitalWrite(12, dir); //Establishes direction of Channel A
   digitalWrite(13, dir); //Establishes direction of Channel B
   digitalWrite(9, LOW);   //Disengage the Brake for Channel A
